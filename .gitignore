@@ -78,3 +78,6 @@ fabric.properties
 
 zig-cache/
 zig-out/
+
+.idea/
+gradle/
