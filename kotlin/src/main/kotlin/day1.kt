@@ -17,18 +17,16 @@ fun day1(input: String) {
     val lines = input.split("\n")
     // 1a
     var total = 0
+    var fixedTotal = 0
+
     lines.forEach { line ->
         val number = "${getFrontDigit(line)}${getBackDigit(line)}"
+        val value = "${getFrontDigit(line, true)}${getBackDigit(line, true)}"
 
         total += number.toInt()
+        fixedTotal += value.toInt()
     }
 
-    // 1b
-    var fixedTotal = 0
-    lines.forEach { line ->
-        val number = "${getFrontDigit(line, true)}${getBackDigit(line, true)}"
-        fixedTotal += number.toInt()
-    }
 
     println("1a: ${total}")
     println("1b: ${fixedTotal}")
