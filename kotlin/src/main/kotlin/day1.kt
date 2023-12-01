@@ -26,7 +26,7 @@ fun day1(input: String) {
     // 1b
     var fixedTotal = 0
     lines.forEach { line ->
-        val number = "${getLiteralFrontDigit(line)}${getLiteralBackDigit(line)}"
+        val number = "${getFrontDigit(line, true)}${getBackDigit(line, true)}"
         fixedTotal += number.toInt()
     }
 
@@ -34,35 +34,17 @@ fun day1(input: String) {
     println("1b: ${fixedTotal}")
 }
 
-fun getFrontDigit(input: String): Char {
-    for (char in input) {
-        if (char.isDigit()) {
-            return char
-        }
-    }
-
-    return '0'
-}
-
-fun getBackDigit(input: String): Char {
-    for (index in input.length - 1 downTo 0) {
-        if (input[index].isDigit()) {
-            return input[index]
-        }
-    }
-
-    return '0'
-}
-
-fun getLiteralFrontDigit(input: String): Char {
+fun getFrontDigit(input: String, compareLiterals: Boolean = false): Char {
     input.forEachIndexed { index, char ->
         if (char.isDigit()) {
             return char
         }
 
-        literalNumberMapping.keys.forEach { key ->
-            if (input.substring(index).startsWith(key)) {
-                return literalNumberMapping[key] ?: '0'
+        if (compareLiterals) {
+            literalNumberMapping.keys.forEach { key ->
+                if (input.substring(index).startsWith(key)) {
+                    return literalNumberMapping[key] ?: '0'
+                }
             }
         }
     }
@@ -70,15 +52,18 @@ fun getLiteralFrontDigit(input: String): Char {
     return '0'
 }
 
-fun getLiteralBackDigit(input: String): Char {
+fun getBackDigit(input: String, compareLiterals: Boolean = false): Char {
     for (index in input.length - 1 downTo 0) {
         if (input[index].isDigit()) {
             return input[index]
         }
 
-        literalNumberMapping.keys.forEach { key ->
-            if (input.substring(0, index + 1).endsWith(key)) {
-                return literalNumberMapping[key] ?: '0'
+        if (compareLiterals) {
+            literalNumberMapping.keys.forEach { key ->
+                // end index is exclusive, so add one
+                if (input.substring(0, index + 1).endsWith(key)) {
+                    return literalNumberMapping[key] ?: '0'
+                }
             }
         }
     }
