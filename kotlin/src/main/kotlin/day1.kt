@@ -20,7 +20,7 @@ fun day1(input: String) {
     var fixedTotal = 0
 
     lines.forEach { line ->
-        val number = "${getFrontDigit(line)}${getBackDigit(line)}"
+        val number = "${getFrontDigit(line,false)}${getBackDigit(line, false)}"
         val value = "${getFrontDigit(line, true)}${getBackDigit(line, true)}"
 
         total += number.toInt()

@@ -2,7 +2,7 @@ package main
 
 import java.nio.charset.Charset
 
-val days = hashMapOf(1 to ::day1)
+val days = hashMapOf(1 to ::day1, 2 to ::day2)
 
 fun main(args: Array<String>) {
     if (args.count() != 1) {
